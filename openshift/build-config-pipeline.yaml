@@ -8,13 +8,15 @@ spec:
     source:
         git:
             ref: master
-            uri: https://github.com/kenmoini/openshift-tasks-devsecops-app.git
+            uri: https://github.com/kenmoini/s2f-tasks-app.git
     env:
         - name: DEV_PROJECT
-          value: dso-webinar-devtest
+          value: test-userN
         - name: STAGE_PROJECT
-          value: dso-webinar-stage
+          value: stage-userN
     strategy:
+        jenkinsPipelineConfig:
+            autoProvisionEnabled: false
         jenkinsPipelineStrategy:
             jenkinsfilePath: Jenkinsfile
         type: JenkinsPipeline
