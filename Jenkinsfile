@@ -29,6 +29,7 @@ pipeline {
         step([$class: 'JUnitResultArchiver', testResults: '**/target/surefire-reports/TEST-*.xml'])
       }
     }
+    /*
     stage('Code Analysis') {
       steps {
         script {
@@ -36,6 +37,7 @@ pipeline {
         }
       }
     }
+    */
     stage('Archive App') {
       steps {
         sh "${mvnCmd} deploy -DskipTests=true -P nexus3"
