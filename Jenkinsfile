@@ -47,7 +47,7 @@ pipeline {
       when {
         expression {
           openshift.withCluster() {
-            openshift.withProject(env.DEV_PROJECT) {
+            openshift.withProject(env.TEST_PROJECT) {
               return !openshift.selector("bc", "tasks").exists();
             }
           }
@@ -56,7 +56,7 @@ pipeline {
       steps {
         script {
           openshift.withCluster() {
-            openshift.withProject(env.DEV_PROJECT) {
+            openshift.withProject(env.TEST_PROJECT) {
               openshift.newBuild("--name=tasks", "--image-stream=jboss-eap70-openshift:1.5", "--binary=true")
             }
           }
@@ -69,7 +69,7 @@ pipeline {
         sh "cp target/openshift-tasks.war oc-build/deployments/ROOT.war"
         script {
           openshift.withCluster() {
-            openshift.withProject(env.DEV_PROJECT) {
+            openshift.withProject(env.TEST_PROJECT) {
               openshift.selector("bc", "tasks").startBuild("--from-dir=oc-build", "--wait=true")
             }
           }
@@ -80,7 +80,7 @@ pipeline {
       when {
         expression {
           openshift.withCluster() {
-            openshift.withProject(env.DEV_PROJECT) {
+            openshift.withProject(env.TEST_PROJECT) {
               return !openshift.selector('dc', 'tasks').exists()
             }
           }
@@ -89,7 +89,7 @@ pipeline {
       steps {
         script {
           openshift.withCluster() {
-            openshift.withProject(env.DEV_PROJECT) {
+            openshift.withProject(env.TEST_PROJECT) {
               def app = openshift.newApp("tasks:latest")
               app.narrow("svc").expose();
               def dc = openshift.selector("dc", "tasks")
@@ -106,7 +106,7 @@ pipeline {
       steps {
         script {
           openshift.withCluster() {
-            openshift.withProject(env.DEV_PROJECT) {
+            openshift.withProject(env.TEST_PROJECT) {
               openshift.selector("dc", "tasks").rollout().latest();
             }
           }
@@ -120,7 +120,7 @@ pipeline {
         }
         script {
           openshift.withCluster() {
-            openshift.tag("${env.DEV_PROJECT}/tasks:latest", "${env.STAGE_PROJECT}/tasks:${version}")
+            openshift.tag("${env.TEST_PROJECT}/tasks:latest", "${env.STAGE_PROJECT}/tasks:${version}")
           }
         }
       }
@@ -130,6 +130,34 @@ pipeline {
         script {
           openshift.withCluster() {
             openshift.withProject(env.STAGE_PROJECT) {
+              if (openshift.selector('dc', 'tasks').exists()) {
+                openshift.selector('dc', 'tasks').delete()
+                openshift.selector('svc', 'tasks').delete()
+                openshift.selector('route', 'tasks').delete()
+              }
+              openshift.newApp("tasks:${version}").narrow("svc").expose()
+            }
+          }
+        }
+      }
+    }
+    stage('Promote to PROD?') {
+      steps {
+        timeout(time:15, unit:'MINUTES') {
+            input message: "Promote to PRODUCTION?", ok: "Promote"
+        }
+        script {
+          openshift.withCluster() {
+            openshift.tag("${env.STAGE_PROJECT}/tasks:latest", "${env.PROD_PROJECT}/tasks:${version}")
+          }
+        }
+      }
+    }
+    stage('Deploy PROD') {
+      steps {
+        script {
+          openshift.withCluster() {
+            openshift.withProject(env.PROD_PROJECT) {
               if (openshift.selector('dc', 'tasks').exists()) {
                 openshift.selector('dc', 'tasks').delete()
                 openshift.selector('svc', 'tasks').delete()
