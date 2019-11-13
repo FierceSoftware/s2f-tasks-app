@@ -9,15 +9,15 @@ spec:
         git:
             ref: master
             uri: https://github.com/kenmoini/s2f-tasks-app.git
-    env:
-        - name: DEV_PROJECT
-          value: test-userN
-        - name: STAGE_PROJECT
-          value: stage-userN
     strategy:
         jenkinsPipelineConfig:
             autoProvisionEnabled: false
         jenkinsPipelineStrategy:
+            env:
+            - name: DEV_PROJECT
+              value: test-userN
+            - name: STAGE_PROJECT
+              value: stage-userN
             jenkinsfilePath: Jenkinsfile
         type: JenkinsPipeline
     triggers:
