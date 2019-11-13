@@ -32,7 +32,7 @@ pipeline {
     stage('Code Analysis') {
       steps {
         script {
-          sh "${mvnCmd} sonar:sonar -Dsonar.host.url=http://sonarqube:9000 -DskipTests=true"
+          sh "${mvnCmd} sonar:sonar -Dsonar.host.url=http://sonarqube.central-cicd.svc.cluster.local:9000 -DskipTests=true"
         }
       }
     }
