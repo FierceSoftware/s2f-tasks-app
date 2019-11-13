@@ -16,9 +16,11 @@ spec:
             jenkinsPipelineConfig:
                 autoProvisionEnabled: false
             env:
-            - name: DEV_PROJECT
+            - name: TEST_PROJECT
               value: test-userN
             - name: STAGE_PROJECT
+              value: stage-userN
+            - name: PROD_PROJECT
               value: stage-userN
             jenkinsfilePath: Jenkinsfile
         type: JenkinsPipeline
