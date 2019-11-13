@@ -13,6 +13,8 @@ spec:
         jenkinsPipelineConfig:
             autoProvisionEnabled: false
         jenkinsPipelineStrategy:
+            jenkinsPipelineConfig:
+                autoProvisionEnabled: false
             env:
             - name: DEV_PROJECT
               value: test-userN
