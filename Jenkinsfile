@@ -30,7 +30,7 @@ pipeline {
     stage('Code Analysis') {
       steps {
         script {
-          sh "${mvnCmd} sonar:sonar -X -Dsonar.host.url=http://sonarqube:9000 -DskipTests=true -Dsonar.login=user0 -Dsonar.password=r3dh4t1!"
+          sh "${mvnCmd} sonar:sonar -X -Dsonar.host.url=http://sonarqube:9000 -DskipTests=true"
         }
       }
     }
