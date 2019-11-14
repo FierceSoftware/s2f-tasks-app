@@ -168,13 +168,13 @@ pipeline {
   }
   post {
       aborted {
-        rocketSend attachments: [[$class: 'MessageAttachment', text: "[${currentBuild.fullDisplayName}] Build Aborted! - ${currentBuild.absoluteUrl}", title: 'Manual Abort', color: 'red']], channel: 'devops-team', avatar: 'https://jenkins.io/images/logos/fire/fire.png', message: "OpenShift Pipeline - ${currentBuild.projectName}", rawMessage: true
+        rocketSend attachments: [[$class: 'MessageAttachment', text: "[${currentBuild.fullDisplayName}] Build Aborted! - ${currentBuild.absoluteUrl}", title: 'Manual Abort', color: 'red']], channel: 'devsecops-workshop', avatar: 'https://jenkins.io/images/logos/fire/fire.png', message: "OpenShift Pipeline - ${currentBuild.projectName}", rawMessage: true
       }
       failure {
-        rocketSend attachments: [[$class: 'MessageAttachment', text: "[${currentBuild.fullDisplayName}] Build Failed! - ${currentBuild.absoluteUrl}", title: 'General Failure', color: 'red']], channel: 'devops-team', avatar: 'https://jenkins.io/images/logos/fire/fire.png', message: "OpenShift Pipeline - ${currentBuild.projectName}", rawMessage: true
+        rocketSend attachments: [[$class: 'MessageAttachment', text: "[${currentBuild.fullDisplayName}] Build Failed! - ${currentBuild.absoluteUrl}", title: 'General Failure', color: 'red']], channel: 'devsecops-workshop', avatar: 'https://jenkins.io/images/logos/fire/fire.png', message: "OpenShift Pipeline - ${currentBuild.projectName}", rawMessage: true
       }
       success {
-        rocketSend attachments: [[$class: 'MessageAttachment', text: "[${currentBuild.fullDisplayName}] Build finished successfully! - ${currentBuild.absoluteUrl}", title: 'Successfully built', color: 'green']], channel: 'devops-team', avatar: 'https://itisatechiesworld.files.wordpress.com/2015/01/cool-jenkins2x3.png', message: "OpenShift Pipeline - ${currentBuild.projectName}", rawMessage: true
+        rocketSend attachments: [[$class: 'MessageAttachment', text: "[${currentBuild.fullDisplayName}] Build finished successfully! - ${currentBuild.absoluteUrl}", title: 'Successfully built', color: 'green']], channel: 'devsecops-workshop', avatar: 'https://itisatechiesworld.files.wordpress.com/2015/01/cool-jenkins2x3.png', message: "OpenShift Pipeline - ${currentBuild.projectName}", rawMessage: true
       }
   }
 }
