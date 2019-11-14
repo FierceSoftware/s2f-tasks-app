@@ -148,7 +148,7 @@ pipeline {
         }
         script {
           openshift.withCluster() {
-            openshift.tag("${env.STAGE_PROJECT}/tasks:latest", "${env.PROD_PROJECT}/tasks:${version}")
+            openshift.tag("${env.TEST_PROJECT}/tasks:latest", "${env.PROD_PROJECT}/tasks:${version}")
           }
         }
       }
@@ -170,7 +170,6 @@ pipeline {
       }
     }
   }
-/*
   post {
       aborted {
         rocketSend attachments: [[$class: 'MessageAttachment', text: "[${currentBuild.fullDisplayName}] Build Aborted! - ${currentBuild.absoluteUrl}", title: 'Manual Abort', color: 'red']], channel: 'devops-team', avatar: 'https://jenkins.io/images/logos/fire/fire.png', message: "OpenShift Pipeline - ${currentBuild.projectName}", rawMessage: true
@@ -182,5 +181,4 @@ pipeline {
         rocketSend attachments: [[$class: 'MessageAttachment', text: "[${currentBuild.fullDisplayName}] Build finished successfully! - ${currentBuild.absoluteUrl}", title: 'Successfully built', color: 'green']], channel: 'devops-team', avatar: 'https://itisatechiesworld.files.wordpress.com/2015/01/cool-jenkins2x3.png', message: "OpenShift Pipeline - ${currentBuild.projectName}", rawMessage: true
       }
   }
-*/
 }
