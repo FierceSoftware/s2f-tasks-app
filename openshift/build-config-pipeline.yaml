@@ -17,11 +17,11 @@ spec:
                 autoProvisionEnabled: false
             env:
             - name: TEST_PROJECT
-              value: test-userN
+              value: test-user0
             - name: STAGE_PROJECT
-              value: stage-userN
+              value: stage-user0
             - name: PROD_PROJECT
-              value: stage-userN
+              value: stage-user0
             jenkinsfilePath: Jenkinsfile
         type: JenkinsPipeline
     triggers:
