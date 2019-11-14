@@ -6,13 +6,11 @@ pipeline {
     }
   }
   stages {
-/*
     stage('Pre-build triggers') {
         steps {
             rocketSend attachments: [[$class: 'MessageAttachment', text: "[${currentBuild.fullDisplayName}] Build Started - ${currentBuild.absoluteUrl}", title: 'Pipeline Build Starting', color: 'grey']], channel: 'devops-team', avatar: 'https://itisatechiesworld.files.wordpress.com/2015/01/cool-jenkins2x3.png', message: "OpenShift Pipeline - ${currentBuild.projectName}", rawMessage: true
         }
     }
-*/
     stage('Build App') {
       steps {
         git branch: 'master', url: 'https://github.com/kenmoini/s2f-tasks-app.git'
