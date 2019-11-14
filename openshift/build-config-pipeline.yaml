@@ -21,7 +21,7 @@ spec:
             - name: STAGE_PROJECT
               value: stage-user0
             - name: PROD_PROJECT
-              value: stage-user0
+              value: prod-user0
             jenkinsfilePath: Jenkinsfile
         type: JenkinsPipeline
     triggers:
