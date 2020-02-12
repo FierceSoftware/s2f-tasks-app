@@ -10,18 +10,14 @@ spec:
             ref: master
             uri: https://github.com/kenmoini/s2f-tasks-app.git
     strategy:
-        jenkinsPipelineConfig:
-            autoProvisionEnabled: false
         jenkinsPipelineStrategy:
-            jenkinsPipelineConfig:
-                autoProvisionEnabled: false
             env:
             - name: TEST_PROJECT
-              value: test-user0
+              value: test-studentN
             - name: STAGE_PROJECT
-              value: stage-user0
+              value: stage-studentN
             - name: PROD_PROJECT
-              value: prod-user0
+              value: prod-studentN
             jenkinsfilePath: Jenkinsfile
         type: JenkinsPipeline
     triggers:
