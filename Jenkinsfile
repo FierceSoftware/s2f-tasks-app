@@ -13,7 +13,6 @@ pipeline {
     }
     stage('Build App') {
       steps {
-        //git branch: 'master', url: 'https://github.com/kenmoini/s2f-tasks-app.git'
         git branch: 'master', url: 'https://gitlab.fiercesw.network/studentN/s2f-tasks-app.git'
         script {
             def pom = readMavenPom file: 'pom.xml'
