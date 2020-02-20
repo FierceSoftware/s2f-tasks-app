@@ -8,7 +8,7 @@ spec:
     source:
         git:
             ref: master
-            uri: https://github.com/kenmoini/s2f-tasks-app.git
+            uri: https://gitlab.fiercesw.network/studentN/s2f-tasks-app.git
     strategy:
         jenkinsPipelineStrategy:
             env:
